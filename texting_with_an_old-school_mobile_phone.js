@@ -75,7 +75,29 @@ Good luck!
 const sendMessage = (message) => {
   let pushes = '';
   let upperCase = false;
+  let button = '';
+  const one = '.,?!1';
+  const two = 'abc2';
+  const three = 'def3';
+  const four = 'ghi4';
+  const five = 'jkl5';
+  const six = 'mno6';
+  const seven = 'pqrs7';
+  const eight = 'tuv8';
+  const nine = 'wxyz9';
+  const star = "'-+=*";
+  const zero = ' ';
   const letters = {
+    '1' : 'digit',
+    '2' : 'digit',
+    '3' : 'digit',
+    '4' : 'digit',
+    '5' : 'digit',
+    '6' : 'digit',
+    '7' : 'digit',
+    '8' : 'digit',
+    '9' : 'digit',
+    '0' : 'digit',
     '.' : one,
     ',' : one,
     '?' : one,
@@ -112,21 +134,36 @@ const sendMessage = (message) => {
     '=' : star,
     ' ' : zero
   }
-  let one = '.,?!';
-  let two = 'abc';
-  let three = 'def';
-  let four = 'ghi';
-  let five = 'jkl';
-  let six = 'mno';
-  let seven = 'pqrs';
-  let eight = 'tuv';
-  let nine = 'wxyz';
-  let star = "'-+=";
-  let zero = ' ';
-
-  // if it is a number
-  // if it is a space
-  // if it is #
+  for(let i = 0; i < message.length; i++) {
+    // if it is a number, star, or pound
+    if(letters[message[i]] === 'digit' || message[i] === '*' || message[i] === '#') {
+      pushes += message[i] + '-'
+      continue;
+    }
+    // if it is a space
+    if(message[i] === ' ') {
+      pushes += 0
+      continue;
+    }
+    // if it is #
+    if((message[i] === (message[i]).toLowerCase() && upperCase === true) || (message[i] === (message[i]).toUpperCase() && upperCase === false)) {
+      pushes += '#'
+      upperCase = !upperCase;
+    }
+    button = letters[message[i]];
+    for(let j = 0; j < button.length; j++) {
+      if(button[i] !== message[i]) {
+        let index = button.length - 1;
+        pushes += button[index];
+        continue;
+      }
+      if(button[j] === message[i]) {
+        let index = button.length - 1;
+        pushes += button[index];
+        break;
+      }
+    }
+  }
 
   return pushes;
 }
