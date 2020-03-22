@@ -75,94 +75,64 @@ Good luck!
 const sendMessage = (message) => {
   let pushes = '';
   let upperCase = false;
-  let button = '';
-  const one = '.,?!1';
-  const two = 'abc2';
-  const three = 'def3';
-  const four = 'ghi4';
-  const five = 'jkl5';
-  const six = 'mno6';
-  const seven = 'pqrs7';
-  const eight = 'tuv8';
-  const nine = 'wxyz9';
-  const star = "'-+=*";
-  const zero = ' ';
-  const letters = {
-    '1' : 'digit',
-    '2' : 'digit',
-    '3' : 'digit',
-    '4' : 'digit',
-    '5' : 'digit',
-    '6' : 'digit',
-    '7' : 'digit',
-    '8' : 'digit',
-    '9' : 'digit',
-    '0' : 'digit',
-    '.' : one,
-    ',' : one,
-    '?' : one,
-    '!' : one,
-    'a' : two,
-    'b' : two,
-    'c' : two,
-    'd' : three,
-    'e' : three,
-    'f' : three,
-    'g' : four,
-    'h' : four,
-    'i' : four,
-    'j' : five,
-    'k' : five,
-    'l' : five,
-    'm' : six,
-    'n' : six,
-    'o' : six,
-    'p' : seven,
-    'q' : seven,
-    'r' : seven,
-    's' : seven,
-    't' : eight,
-    'u' : eight,
-    'v' : eight,
-    'w' : nine,
-    'x' : nine,
-    'y' : nine,
-    'z' : nine,
-    "'" : star,
-    '-' : star,
-    '+' : star,
-    '=' : star,
-    ' ' : zero
+  const buttons = {
+    '1' : '1-',
+    '2' : '2-',
+    '3' : '3-',
+    '4' : '4-',
+    '5' : '5-',
+    '6' : '6-',
+    '7' : '7-',
+    '8' : '8-',
+    '9' : '9-',
+    '0' : '0-',
+    '.' : '1',
+    ',' : '11',
+    '?' : '111',
+    '!' : '1111',
+    'a' : '2',
+    'b' : '22',
+    'c' : '222',
+    'd' : '3',
+    'e' : '33',
+    'f' : '333',
+    'g' : '4',
+    'h' : '44',
+    'i' : '444',
+    'j' : '5',
+    'k' : '55',
+    'l' : '555',
+    'm' : '6',
+    'n' : '66',
+    'o' : '666',
+    'p' : '7',
+    'q' : '77',
+    'r' : '777',
+    's' : '7777',
+    't' : '8',
+    'u' : '88',
+    'v' : '888',
+    'w' : '9',
+    'x' : '99',
+    'y' : '999',
+    'z' : '9999',
+    "'" : '*',
+    '-' : '**',
+    '+' : '***',
+    '=' : '****',
+    ' ' : '0'
   }
   for(let i = 0; i < message.length; i++) {
-    // if it is a number, star, or pound
-    if(letters[message[i]] === 'digit' || message[i] === '*' || message[i] === '#') {
-      pushes += message[i] + '-'
+    if((message[i] === (message[i]).toUpperCase() && upperCase === false) || (message[i] === (message[i]).toLowerCase() && upperCase === true)) {
+      pushes += '#' + buttons[message[i]];
+      upperCase = !upperCase
       continue;
     }
-    // if it is a space
-    if(message[i] === ' ') {
-      pushes += 0
+    if(i > 0 && buttons[message[i][0]] === buttons[message[i-1][0]]) {
+      pushes += ' ' + buttons[message[i]];
       continue;
     }
-    // if it is #
-    if((message[i] === (message[i]).toLowerCase() && upperCase === true) || (message[i] === (message[i]).toUpperCase() && upperCase === false)) {
-      pushes += '#'
-      upperCase = !upperCase;
-    }
-    button = letters[message[i]];
-    for(let j = 0; j < button.length; j++) {
-      if(button[i] !== message[i]) {
-        let index = button.length - 1;
-        pushes += button[index];
-        continue;
-      }
-      if(button[j] === message[i]) {
-        let index = button.length - 1;
-        pushes += button[index];
-        break;
-      }
-    }
+    pushes += buttons[message[i]];
   }
 
   return pushes;
